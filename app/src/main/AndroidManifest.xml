@@ -18,7 +18,7 @@
 
         <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCdb85ueqDktO1fW3--vo6fQcVaBmXh-l4"/>
 
-        <activity android:name=".MainActivity">
+        <activity android:name="com.inventory.traсker.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
