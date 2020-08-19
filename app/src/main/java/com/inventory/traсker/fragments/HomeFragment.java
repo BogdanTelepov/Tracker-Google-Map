@@ -14,11 +14,18 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 
 import com.google.android.gms.maps.OnMapReadyCallback;
 
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.inventory.treaker.R;
 
 import java.util.Objects;
@@ -28,6 +35,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
     private static final int TAG_CODE_PERMISSION_LOCATION = 1;
     GoogleMap map;
     MapView mapView;
+    FusedLocationProviderClient client;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,13 +68,24 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback, Google
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
-
         assert map != null;
         if (ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) ==
                 PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) ==
                         PackageManager.PERMISSION_GRANTED) {
+            client = LocationServices.getFusedLocationProviderClient(getContext());
+            Task<Location> task = client.getLastLocation();
+            task.addOnSuccessListener(location -> {
+                if (location != null) {
+                    mapView.getMapAsync(googleMap1 -> {
+                        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                        map.addMarker(new MarkerOptions().position(latLng).title("Start"));
+                        map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
+                    });
+                }
+            });
             map.setMyLocationEnabled(true);
+
             map.setOnMyLocationButtonClickListener(this);
             map.setOnMyLocationClickListener(this);
 
