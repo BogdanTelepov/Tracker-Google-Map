@@ -9,7 +9,7 @@
     <com.google.android.gms.maps.MapView
         android:id="@+id/google_mapView"
         android:layout_width="match_parent"
-        android:layout_height="350dp" />
+        android:layout_height="300dp" />
 
 
     <Button
@@ -21,6 +21,7 @@
         android:text="Start" />
 
     <Button
+        android:id="@+id/button_finish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/google_mapView"
@@ -28,5 +29,71 @@
         android:layout_margin="15dp"
         android:text="Finish" />
 
+    <TextView
+        android:id="@+id/text_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_start"
+        android:layout_margin="10dp"
+        android:text="Time:"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <Chronometer
+        android:id="@+id/chronometer_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_start"
+        android:layout_margin="10dp"
+        android:layout_toEndOf="@+id/text_time"
+        android:gravity="center_horizontal"
+        android:text="@string/n_a"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/text_length"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_time"
+        android:layout_margin="10dp"
+        android:text="Length:"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/text_runLength"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/chronometer_time"
+        android:layout_margin="10dp"
+        android:layout_toEndOf="@+id/text_length"
+        android:text="@string/n_a"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/text_speed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_length"
+        android:layout_margin="10dp"
+        android:text="Speed:"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/text_runSpeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_runLength"
+        android:layout_margin="10dp"
+        android:layout_toEndOf="@+id/text_speed"
+        android:text="@string/n_a"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
 
 </RelativeLayout>
